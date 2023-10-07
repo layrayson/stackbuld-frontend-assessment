@@ -3,28 +3,41 @@ import {
   CreatePostParams,
   PaginatedRequestByUserParams,
   PaginatedRequestParams,
+  PaginatedResponse,
+  Post,
   RequestByIdParams,
   UpdatePostParams,
 } from "../types";
 
 export default class PostService {
-  static fetchPaginatedPosts = ({ page, title }: PaginatedRequestParams) =>
+  static fetchPaginatedPosts = ({
+    page,
+    title,
+  }: PaginatedRequestParams): Promise<PaginatedResponse<Post>> =>
     axiosClient
-      .get(`/post?limit=10&page=${page}${title ? "&title=" + title : ""}`)
-      .then((res) => res.data);
+      .get<any, PaginatedResponse<Post>>(
+        `/post?limit=10&page=${page}${title ? "&title=" + title : ""}`
+      )
+      .then((res) => ({
+        data: res.data,
+        page: res.page,
+      }));
 
   static fetchPaginatedPostsByUser = ({
     page,
     title,
     userId,
-  }: PaginatedRequestByUserParams) =>
+  }: PaginatedRequestByUserParams): Promise<PaginatedResponse<Post>> =>
     axiosClient
-      .get(
+      .get<any, PaginatedResponse<Post>>(
         `/user/${userId}/post?limit=10&page=${page}${
           title ? "&title=" + title : ""
         }`
       )
-      .then((res) => res.data);
+      .then((res) => ({
+        data: res.data,
+        page: res.page,
+      }));
 
   static fetchSinglePost = ({ id }: RequestByIdParams) =>
     axiosClient.get(`/post/${id}`).then((data) => data.data);
