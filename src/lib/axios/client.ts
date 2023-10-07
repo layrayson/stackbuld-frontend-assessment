@@ -17,6 +17,7 @@ const axiosClient: AxiosInstance = axios.create({
   //   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
+    "app-id": process.env.NEXT_PUBLIC_APP_ID,
   },
 });
 
