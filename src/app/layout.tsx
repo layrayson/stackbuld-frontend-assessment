@@ -2,7 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import ReactQueryWrapper from "@/components/ReactQueryWrapper";
+import ReactQueryWrapper from "@/components/wrappers/ReactQueryWrapper";
+import ReduxProvider from "@/components/wrappers/ReduxProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,7 +19,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReactQueryWrapper>{children}</ReactQueryWrapper>
+        <ReduxProvider>
+          <ReactQueryWrapper>{children}</ReactQueryWrapper>
+        </ReduxProvider>
       </body>
     </html>
   );

@@ -39,8 +39,8 @@ export default class PostService {
         page: res.page,
       }));
 
-  static fetchSinglePost = ({ id }: RequestByIdParams) =>
-    axiosClient.get(`/post/${id}`).then((data) => data.data);
+  static fetchSinglePost = ({ id }: RequestByIdParams): Promise<Post> =>
+    axiosClient.get<any, Post>(`/post/${id}`).then((res) => res);
 
   static createSinglePost = ({ post }: CreatePostParams) =>
     axiosClient.post(`/post/create`, post).then((res) => res.data);
