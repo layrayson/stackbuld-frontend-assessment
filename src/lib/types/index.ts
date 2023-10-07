@@ -13,8 +13,8 @@ export type User = {
   picture: string;
 };
 export type PaginatedResponse<T> = {
-  data: T;
-  nextPage: number | null;
+  data: T[];
+  page: number | null;
 };
 export type RequestByIdParams = {
   id: string;
