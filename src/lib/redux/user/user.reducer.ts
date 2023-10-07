@@ -2,11 +2,11 @@ import { User } from "@/lib/types";
 import { UserActionType, UserActions } from "./user.type";
 
 interface State {
-  user: User | null;
+  currentUser: User | null;
 }
 
 const initialState: State = {
-  user: null,
+  currentUser: null,
 };
 
 export const userReducer = (
@@ -17,7 +17,7 @@ export const userReducer = (
     case UserActionType.SET_CURRENT_USER:
       return {
         ...state,
-        user: action.payload ?? state.user,
+        currentUser: action.payload ?? state.currentUser,
       };
     default:
       return state;
