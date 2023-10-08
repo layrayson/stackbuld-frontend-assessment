@@ -3,6 +3,7 @@ export type Post = {
   text: string;
   image: string;
   publishDate: string;
+  owner: User;
 };
 
 export type User = {
@@ -20,10 +21,10 @@ export type RequestByIdParams = {
   id: string;
 };
 export type CreatePostParams = {
-  post: Omit<Post, "id"> & { ownerId: string };
+  post: Omit<Post, "id" | "publishDate" | "owner"> & { owner: string };
 };
 export type UpdatePostParams = RequestByIdParams & {
-  post: Omit<Post, "id">;
+  post: Omit<Post, "id" | "publishDate" | "owner">;
 };
 
 export type PaginatedRequestParams = {
