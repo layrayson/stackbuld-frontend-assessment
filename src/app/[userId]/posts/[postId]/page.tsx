@@ -24,7 +24,7 @@ const ViewSingleUserPostPage = () => {
       <div>{data?.id}</div>
       <button
         onClick={() => {
-          router.push(pathName + "/update");
+          router.push(pathName + "/edit");
         }}
       >
         update

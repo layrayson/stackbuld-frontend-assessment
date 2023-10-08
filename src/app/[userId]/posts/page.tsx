@@ -35,6 +35,13 @@ const UserPostsPage = () => {
           ))}
         </div>
       )}
+      <button
+        onClick={() => {
+          router.push(pathName + "/create");
+        }}
+      >
+        Create
+      </button>
     </>
   );
 };
