@@ -32,7 +32,7 @@ const UserPostsPage = () => {
                 author={post.owner.firstName + " " + post.owner.lastName}
                 avatar={post.owner.picture}
                 updatedAt={post.publishDate}
-                onClick={() => router.push("/" + post.id)}
+                onClick={() => router.push(pathName + "/" + post.id)}
               />
             ))}
           </div>
