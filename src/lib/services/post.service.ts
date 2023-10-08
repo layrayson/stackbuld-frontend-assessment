@@ -40,14 +40,14 @@ export default class PostService {
       }));
 
   static fetchSinglePost = ({ id }: RequestByIdParams): Promise<Post> =>
-    axiosClient.get<any, Post>(`/post/${id}`).then((res) => res);
+    axiosClient.get<any, Post>(`/post/${id}`);
 
-  static createSinglePost = ({ post }: CreatePostParams) =>
-    axiosClient.post(`/post/create`, post).then((res) => res.data);
+  static createSinglePost = ({ post }: CreatePostParams): Promise<Post> =>
+    axiosClient.post<any, Post>(`/post/create`, post);
 
-  static updateSinglePost = ({ post, id }: UpdatePostParams) =>
-    axiosClient.put(`/post/${id}`, post).then((res) => res.data);
+  static updateSinglePost = ({ post, id }: UpdatePostParams): Promise<Post> =>
+    axiosClient.put<any, Post>(`/post/${id}`, post);
 
-  static deleteSinglePost = ({ id }: RequestByIdParams) =>
-    axiosClient.delete(`/post/${id}`).then((res) => res.data);
+  static deleteSinglePost = ({ id }: RequestByIdParams): Promise<string> =>
+    axiosClient.delete<any, string>(`/post/${id}`);
 }

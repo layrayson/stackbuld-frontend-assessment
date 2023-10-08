@@ -3,29 +3,26 @@ import {
   RequestByIdParams,
   UpdatePostParams,
 } from "../types/index";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import PostService from "../services/post.service";
 
-export const useCreateSinglePost = (params: CreatePostParams) => {
-  return useQuery({
-    queryKey: ["create-post"],
-    queryFn: () => PostService.createSinglePost(params),
-    initialData: [],
+export const useCreateSinglePost = () => {
+  return useMutation({
+    mutationFn: (params: CreatePostParams) =>
+      PostService.createSinglePost(params),
   });
 };
 
-export const useUpdateSinglePost = (params: UpdatePostParams) => {
-  return useQuery({
-    queryKey: ["update-post"],
-    queryFn: () => PostService.updateSinglePost(params),
-    initialData: [],
+export const useUpdateSinglePost = () => {
+  return useMutation({
+    mutationFn: (params: UpdatePostParams) =>
+      PostService.updateSinglePost(params),
   });
 };
 
-export const useDeleteSinglePost = (params: RequestByIdParams) => {
-  return useQuery({
-    queryKey: ["delete-post"],
-    queryFn: () => PostService.deleteSinglePost(params),
-    initialData: [],
+export const useDeleteSinglePost = () => {
+  return useMutation({
+    mutationFn: (params: RequestByIdParams) =>
+      PostService.deleteSinglePost(params),
   });
 };
