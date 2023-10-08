@@ -23,7 +23,7 @@ const ViewSingleUserPostPage = () => {
   );
   return (
     <>
-      <div className="max-w-3xl mx-auto pb-4">
+      <div>
         {data && (
           <BlogPostDetailedView
             title={data.text.substring(0, 30)}

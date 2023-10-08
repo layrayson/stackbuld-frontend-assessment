@@ -1,12 +1,18 @@
 "use client";
 
 import { useFetchUsers } from "@/lib/hooks/useFetchUsers";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import UserPreview from "../templates/UserPreview";
 import { useTypedSelector } from "@/lib/hooks/useTypedSelector";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "react";
+import UserAction from "@/lib/redux/user/user.action";
+import Button from "../custom/Button";
 
-const SideDrawer = () => {
+const SideDrawer = ({ closeDrawer }: { closeDrawer(): void }) => {
   const router = useRouter();
+  const pathName = usePathname();
+  const dispatch: Dispatch<any> = useDispatch();
 
   const { isLoading, isFetching, data: users } = useFetchUsers();
   const { currentUser } = useTypedSelector((state) => state.userReducer);
@@ -14,8 +20,8 @@ const SideDrawer = () => {
     <div className="py-4">
       <div className="mb-4">
         <div>
-          <div className="px-4">
-            <h5 className="font-medium text-gray-500">Current User:</h5>
+          <div className="px-4 mb-2">
+            <h5 className="text-sm text-gray-500 font-medium">Current User</h5>
           </div>
           <div className="bg-gray-100">
             <UserPreview
@@ -24,9 +30,18 @@ const SideDrawer = () => {
             />
           </div>
         </div>
+        <div className="px-4 mt-4">
+          <Button
+            value={"Create New Post"}
+            onClick={() => {
+              router.push(pathName + "/create");
+              closeDrawer();
+            }}
+          />
+        </div>
       </div>
-      <div className="px-4">
-        <h5 className="text-sm text-gray-500 text-lighter">
+      <div className="px-4 mb-2">
+        <h5 className="text-sm text-gray-500 font-medium">
           {" "}
           Switch user to view posts
         </h5>
@@ -39,7 +54,11 @@ const SideDrawer = () => {
                 key={"user-" + index}
                 userName={user.firstName + " " + user.lastName}
                 avatar={user.picture}
-                onClick={() => router.push("/" + user.id + "/posts")}
+                onClick={() => {
+                  dispatch(UserAction.setCurrentUser(user));
+                  router.push("/" + user.id + "/posts");
+                  closeDrawer();
+                }}
               />
             )
           )}

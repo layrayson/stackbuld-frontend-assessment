@@ -29,7 +29,7 @@ export default async function RootLayout({
           <ReactQueryWrapper>
             <div>
               <NavBar />
-              {children}
+              <div className="max-w-3xl mx-auto">{children}</div>
             </div>
           </ReactQueryWrapper>
         </ReduxProvider>

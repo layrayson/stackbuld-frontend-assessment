@@ -20,7 +20,7 @@ const UserPostsPage = () => {
 
   return (
     <>
-      <div className="max-w-3xl mx-auto">
+      <div>
         {!isLoadingPosts && !isFetchingPosts && (
           <div className="grid gap-4 gap-y-12 md:gap-y-4 grid-cols-1 md:grid-cols-2">
             {posts?.data.map((post, index) => (
@@ -38,13 +38,6 @@ const UserPostsPage = () => {
           </div>
         )}
       </div>
-      <button
-        onClick={() => {
-          router.push(pathName + "/create");
-        }}
-      >
-        Create
-      </button>
     </>
   );
 };

@@ -51,7 +51,7 @@ const NavBar = () => {
         onClose={() => setShowDrawer(false)}
         direction="right"
       >
-        <SideDrawer />
+        <SideDrawer closeDrawer={() => setShowDrawer(false)} />
       </Drawer>
     </>
   );

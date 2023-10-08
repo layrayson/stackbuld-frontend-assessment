@@ -21,7 +21,9 @@ const EditPostPage = () => {
 
   return (
     <>
-      <div>Edit Post</div>
+      <div className="py-4">
+        <h5 className="text-3xl font-bold">Create Post</h5>
+      </div>
       <PostForm
         text={text}
         onInputChanged={function (e: ChangeEvent<HTMLTextAreaElement>): void {
