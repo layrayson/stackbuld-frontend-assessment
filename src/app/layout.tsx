@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 
 import ReactQueryWrapper from "@/components/wrappers/ReactQueryWrapper";
 import ReduxProvider from "@/components/wrappers/ReduxProvider";
+import NavBar from "@/components/utils/NavBar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,9 +19,19 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
+      <link
+        href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+        rel="stylesheet"
+      />
+
       <body className={inter.className}>
         <ReduxProvider>
-          <ReactQueryWrapper>{children}</ReactQueryWrapper>
+          <ReactQueryWrapper>
+            <div>
+              <NavBar />
+              {children}
+            </div>
+          </ReactQueryWrapper>
         </ReduxProvider>
       </body>
     </html>

@@ -7,7 +7,7 @@ import { useTypedSelector } from "@/lib/hooks/useTypedSelector";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-const ViewSingleUserPostPage = () => {
+const ViewSinglePostPage = () => {
   const params = useParams();
 
   const router = useRouter();
@@ -15,7 +15,6 @@ const ViewSingleUserPostPage = () => {
   const { postId } = params;
 
   const { currentPost } = useTypedSelector((state) => state.postReducer);
-  const { mutate, isLoading: deleting } = useDeleteSinglePost();
 
   const { isFetched, data } = useFetchSinglePost(
     { id: postId as string },
@@ -34,27 +33,9 @@ const ViewSingleUserPostPage = () => {
             updatedAt={data.publishDate}
           />
         )}
-
-        <div className="pt-24 flex justify-end gap-4">
-          <Button
-            className="bg-blue-700 text-white w-fit px-8"
-            value={"Edit"}
-            onClick={() => {
-              router.push(pathName + "/edit");
-            }}
-          />
-          <Button
-            className="bg-red-700 text-white w-fit px-8"
-            value={"Delete Post"}
-            isLoading={deleting}
-            onClick={() => {
-              mutate({ id: currentPost?.id ?? data!.id });
-            }}
-          />
-        </div>
       </div>
     </>
   );
 };
 
-export default ViewSingleUserPostPage;
+export default ViewSinglePostPage;
