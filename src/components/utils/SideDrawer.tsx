@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { Dispatch } from "react";
 import UserAction from "@/lib/redux/user/user.action";
 import Button from "../custom/Button";
+import { toast } from "react-hot-toast";
 
 const SideDrawer = ({ closeDrawer }: { closeDrawer(): void }) => {
   const router = useRouter();
@@ -34,7 +35,9 @@ const SideDrawer = ({ closeDrawer }: { closeDrawer(): void }) => {
           <Button
             value={"Create New Post"}
             onClick={() => {
-              router.push(pathName + "/create");
+              if (!currentUser)
+                return toast.error("Please select a user to create post");
+              router.push("/" + currentUser?.id + "/posts/create");
               closeDrawer();
             }}
           />

@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 import ReactQueryWrapper from "@/components/wrappers/ReactQueryWrapper";
 import ReduxProvider from "@/components/wrappers/ReduxProvider";
@@ -30,6 +31,7 @@ export default async function RootLayout({
             <div>
               <NavBar />
               <div className="max-w-3xl mx-auto py-8">{children}</div>
+              <Toaster position="top-center" />
             </div>
           </ReactQueryWrapper>
         </ReduxProvider>
