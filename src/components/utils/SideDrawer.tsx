@@ -20,17 +20,27 @@ const SideDrawer = ({ closeDrawer }: { closeDrawer(): void }) => {
   return (
     <div className="py-4">
       <div className="mb-4">
-        <div>
-          <div className="px-4 mb-2">
-            <h5 className="text-sm text-gray-500 font-medium">Current User</h5>
+        {currentUser ? (
+          <div>
+            <div className="px-4 mb-2">
+              <h5 className="text-sm text-gray-500 font-medium">
+                Current User
+              </h5>
+            </div>
+            <div className="bg-gray-100">
+              <UserPreview
+                userName={currentUser?.firstName + " " + currentUser?.lastName}
+                avatar={currentUser?.picture ?? ""}
+              />
+            </div>
           </div>
-          <div className="bg-gray-100">
-            <UserPreview
-              userName={currentUser?.firstName + " " + currentUser?.lastName}
-              avatar={currentUser?.picture ?? ""}
-            />
+        ) : (
+          <div className="p-4 bg-gray-100">
+            <h5 className="text-base text-center">
+              You have not selected any user
+            </h5>
           </div>
-        </div>
+        )}
         <div className="px-4 mt-4">
           <Button
             value={"Create New Post"}
