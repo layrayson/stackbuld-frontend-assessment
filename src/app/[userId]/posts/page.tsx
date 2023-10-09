@@ -18,7 +18,6 @@ const UserPostsPage = () => {
   const params = useParams();
   const searchParams = useSearchParams();
   const title = searchParams.get("title");
-
   const pathName = usePathname();
   const dispatch: Dispatch<any> = useDispatch();
   const { userId } = params;
@@ -38,6 +37,7 @@ const UserPostsPage = () => {
     userId: userId as string,
     title: title ?? "",
   });
+
   const handlePageClick = ({ selected }: { selected: number }) => {
     router.push(pathName + "?" + createQueryString("page", `${selected + 1}`));
   };
@@ -70,17 +70,22 @@ const UserPostsPage = () => {
                     author={post.owner.firstName + " " + post.owner.lastName}
                     avatar={post.owner.picture}
                     updatedAt={post.publishDate}
-                    onClick={() => router.push(pathName + "/" + post.id)}
+                    onClick={() => {
+                      dispatch(PostAction.setCurrentPost(post));
+                      router.push(pathName + "/" + post.id);
+                    }}
                   />
                 ))}
           </div>
         }
       </div>
-      <Pagination
-        handlePageClick={handlePageClick}
-        pageCount={Math.floor((posts?.total ?? 0) / 10)}
-        initialPage={posts?.page ?? 1}
-      />
+      <div className="w-fit mx-auto pt-8">
+        <Pagination
+          handlePageClick={handlePageClick}
+          pageCount={Math.floor((posts?.total ?? 0) / 10)}
+          initialPage={posts?.page ?? 0}
+        />
+      </div>
     </>
   );
 };

@@ -1,26 +1,28 @@
 "use client";
 import PostForm from "@/components/templates/BlogPostForm";
-import { useFetchSinglePost } from "@/lib/hooks/useFetchDataById";
-import {
-  useCreateSinglePost,
-  useUpdateSinglePost,
-} from "@/lib/hooks/useMutatePost";
-import { useTypedSelector } from "@/lib/hooks/useTypedSelector";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useCreateSinglePost } from "@/lib/hooks/useMutatePost";
+import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { toast } from "react-hot-toast";
 
 const EditPostPage = () => {
   const params = useParams();
   const { userId } = params;
-
   const router = useRouter();
-  const pathName = usePathname();
   const [text, setText] = useState<string>("");
 
-  const { mutate } = useCreateSinglePost();
+  const { mutate, isLoading } = useCreateSinglePost({
+    onSuccess: () => {
+      toast.success("You've created a new post");
+      router.push("/" + userId + "/posts");
+    },
+    onError: () => {
+      toast.error("Failed to create");
+    },
+  });
 
   return (
-    <>
+    <div className="px-2 md:px-0">
       <div className="py-4">
         <h5 className="text-3xl font-bold">Create Post</h5>
       </div>
@@ -40,9 +42,10 @@ const EditPostPage = () => {
             },
           });
         }}
+        isLoading={isLoading}
         buttonValue={"Save Changes"}
       />
-    </>
+    </div>
   );
 };
 

@@ -5,22 +5,31 @@ import { useFetchSinglePost } from "@/lib/hooks/useFetchDataById";
 import { useDeleteSinglePost } from "@/lib/hooks/useMutatePost";
 import { useTypedSelector } from "@/lib/hooks/useTypedSelector";
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const ViewSingleUserPostPage = () => {
   const params = useParams();
 
   const router = useRouter();
   const pathName = usePathname();
-  const { postId } = params;
+  const { postId, userId } = params;
 
   const { currentPost } = useTypedSelector((state) => state.postReducer);
-  const { mutate, isLoading: deleting } = useDeleteSinglePost();
+  const { mutate, isLoading: deleting } = useDeleteSinglePost({
+    onSuccess: () => {
+      toast.success("Delete successful");
+      router.push("/" + userId + "/posts");
+    },
+    onError: () => {
+      toast.error("Delete operation failed");
+    },
+  });
 
-  const { isFetched, isLoading, data } = useFetchSinglePost(
+  const { isLoading, data } = useFetchSinglePost(
     { id: postId as string },
     currentPost
   );
+
   return (
     <>
       <div>
@@ -34,7 +43,7 @@ const ViewSingleUserPostPage = () => {
           showSkeleton={isLoading || !data}
         />
 
-        <div className="pt-24 flex justify-end gap-4">
+        <div className="pt-24 flex justify-end gap-4 px-2 md:px-0">
           <Button
             className="bg-blue-700 text-white w-fit px-8"
             value={"Edit"}

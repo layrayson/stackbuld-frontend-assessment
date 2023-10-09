@@ -3,26 +3,32 @@ import PostForm from "@/components/templates/BlogPostForm";
 import { useFetchSinglePost } from "@/lib/hooks/useFetchDataById";
 import { useUpdateSinglePost } from "@/lib/hooks/useMutatePost";
 import { useTypedSelector } from "@/lib/hooks/useTypedSelector";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { toast } from "react-hot-toast";
 
 const EditPostPage = () => {
   const params = useParams();
-
   const router = useRouter();
-  const pathName = usePathname();
   const [text, setText] = useState<string>();
-  const { postId } = params;
+  const { postId, userId } = params;
 
   const { currentPost } = useTypedSelector((state) => state.postReducer);
-  const { mutate } = useUpdateSinglePost();
 
-  const { isFetched, data } = useFetchSinglePost(
-    { id: postId as string },
-    currentPost
-  );
+  const { mutate, isLoading } = useUpdateSinglePost({
+    onSuccess: () => {
+      toast.success("Changes saved");
+      router.push("/" + userId + "/posts");
+    },
+    onError: () => {
+      toast.error("Failed to update");
+    },
+  });
+
+  const { data } = useFetchSinglePost({ id: postId as string }, currentPost);
+
   return (
-    <>
+    <div className="px-2 md:px-0">
       <div className="py-4">
         <h5 className="text-3xl font-bold">Edit Post</h5>
       </div>
@@ -42,9 +48,10 @@ const EditPostPage = () => {
             },
           });
         }}
+        isLoading={isLoading}
         buttonValue={"Save Changes"}
       />
-    </>
+    </div>
   );
 };
 

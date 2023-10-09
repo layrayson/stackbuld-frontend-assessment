@@ -4,9 +4,11 @@ import Pagination from "@/components/custom/Pagination";
 import BlogPostPreview from "@/components/templates/BlogPostPreview";
 import { useFetchPaginatedPosts } from "@/lib/hooks/useFetchPaginatedData";
 import { useFetchUsers } from "@/lib/hooks/useFetchUsers";
+import PostAction from "@/lib/redux/post/post.action";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { Dispatch, useCallback } from "react";
 import ReactPaginate from "react-paginate";
+import { useDispatch } from "react-redux";
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -21,6 +23,7 @@ export default function Home() {
   });
   const router = useRouter();
   const pathName = usePathname();
+  const dispatch: Dispatch<any> = useDispatch();
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -65,17 +68,23 @@ export default function Home() {
                     author={post.owner.firstName + " " + post.owner.lastName}
                     avatar={post.owner.picture}
                     updatedAt={post.publishDate}
-                    onClick={() => router.push("/posts/" + post.id)}
+                    onClick={() => {
+                      dispatch(PostAction.setCurrentPost(post));
+
+                      router.push("/posts/" + post.id);
+                    }}
                   />
                 ))}
           </div>
         }
       </div>
-      <Pagination
-        handlePageClick={handlePageClick}
-        pageCount={Math.floor((posts?.total ?? 0) / 10)}
-        initialPage={posts?.page ?? 1}
-      />
+      <div className="w-fit mx-auto pt-8">
+        <Pagination
+          handlePageClick={handlePageClick}
+          pageCount={Math.floor((posts?.total ?? 0) / 10)}
+          initialPage={posts?.page ?? 0}
+        />
+      </div>
     </>
   );
 }

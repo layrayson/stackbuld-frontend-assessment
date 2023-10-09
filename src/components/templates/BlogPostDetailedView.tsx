@@ -75,7 +75,7 @@ const BlogPostDetailedView = ({
           )}
         </div>
         <div className="py-2">
-          <div className={showSkeleton ? "" : "px-2"}>
+          <div className={showSkeleton ? "px-2 md:px-0" : "px-2"}>
             <div className="mb-2">
               <h5 className="text-5xl font-bold">
                 {showSkeleton ? <Skeleton /> : title}

@@ -76,7 +76,7 @@ const BlogPostPreview = ({
               />
             )}
           </div>
-          <div className={showSkeleton ? "" : "p-2"}>
+          <div className={showSkeleton ? "p-2 md:p-0" : "p-2"}>
             <div className="mb-2">
               <h5 className="line-clamp-1 text-2xl font-bold">
                 {" "}

@@ -6,6 +6,7 @@ interface PostFormProps {
   onInputChanged(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void;
   onSubmit(e: FormEvent<HTMLFormElement>): void;
   buttonValue: string;
+  isLoading: boolean;
 }
 
 const PostForm = ({
@@ -13,6 +14,7 @@ const PostForm = ({
   onInputChanged,
   onSubmit,
   buttonValue,
+  isLoading,
 }: PostFormProps) => {
   return (
     <div>
@@ -60,7 +62,7 @@ const PostForm = ({
         </div>
 
         <div className="mt-4">
-          <Button type="submit" value={buttonValue} />
+          <Button type="submit" isLoading={isLoading} value={buttonValue} />
         </div>
       </form>
     </div>

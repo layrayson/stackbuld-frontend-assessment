@@ -15,13 +15,15 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="px-4 py-4 border-b">
+      <nav className="px-2 md:px-4 py-4 border-b">
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-24 flex-grow">
+          <div className="flex items-center gap-4 md:gap-28 flex-grow">
             <Link href={"/"}>
               <div className="flex items-center gap-2">
                 <Image src={"/logo.svg"} alt="brand" width={34} height={34} />
-                <h5 className="text-medium text-lg">Bloggers</h5>
+                <h5 className="text-medium text-lg hidden md:block">
+                  Bloggers
+                </h5>
               </div>
             </Link>
             <div className="flex-grow">
@@ -41,7 +43,6 @@ const NavBar = () => {
                   }}
                   placeholder="Search for anything..."
                   type="text"
-                  name="search"
                   className="placeholder:text-slate-400 
                 block bg-white w-full max-w-sm border border-slate-300 
                 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none
