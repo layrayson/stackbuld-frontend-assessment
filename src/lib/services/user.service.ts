@@ -9,6 +9,7 @@ export default class UserService {
       .then((res) => ({
         data: res.data,
         page: res.page,
+        total: res.total,
       }));
 
   static fetchSingleUser = ({ id }: RequestByIdParams) =>
