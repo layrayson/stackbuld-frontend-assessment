@@ -47,7 +47,7 @@ const NavBar = () => {
                       }`
                     );
                   }}
-                  placeholder="Search for anything..."
+                  placeholder="Search for post"
                   type="text"
                   className="placeholder:text-slate-400 
                 block bg-white w-full max-w-sm border border-slate-300 
