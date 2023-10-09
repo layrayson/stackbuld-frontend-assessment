@@ -20,9 +20,9 @@ const NavBar = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-4 md:gap-28 flex-grow">
             <Link href={"/"}>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 <Image src={"/logo.svg"} alt="brand" width={34} height={34} />
-                <h5 className="text-medium text-lg hidden md:block">
+                <h5 className="font-medium text-lg hidden md:block">
                   Bloggers
                 </h5>
               </div>
@@ -35,7 +35,7 @@ const NavBar = () => {
                 </span>
                 <DebounceInput
                   onChange={(event) => {
-                    toast.success(
+                    toast.error(
                       "The mock api does not accept filters. It returns the same data on filter even though the request went through",
                       {
                         duration: 3000,
