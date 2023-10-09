@@ -7,6 +7,7 @@ import { useState } from "react";
 import SideDrawer from "./SideDrawer";
 import "react-modern-drawer/dist/index.css";
 import { usePathname, useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 const NavBar = () => {
   const router = useRouter();
@@ -34,6 +35,12 @@ const NavBar = () => {
                 </span>
                 <DebounceInput
                   onChange={(event) => {
+                    toast.success(
+                      "The mock api does not accept filters. It returns the same data on filter even though the request went through",
+                      {
+                        duration: 3000,
+                      }
+                    );
                     router.push(
                       `${pathName}${
                         event.target.value ? "?title=" + event.target.value : ""
