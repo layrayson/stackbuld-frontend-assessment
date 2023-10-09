@@ -16,11 +16,12 @@ export default class PostService {
   }: PaginatedRequestParams): Promise<PaginatedResponse<Post>> =>
     axiosClient
       .get<any, PaginatedResponse<Post>>(
-        `/post?limit=10&page=${page}${title ? "&title=" + title : ""}`
+        `/post?limit=10&page=${page}${title ? "&text=" + title : ""}`
       )
       .then((res) => ({
         data: res.data,
         page: res.page,
+        total: res.total,
       }));
 
   static fetchPaginatedPostsByUser = ({
@@ -31,12 +32,13 @@ export default class PostService {
     axiosClient
       .get<any, PaginatedResponse<Post>>(
         `/user/${userId}/post?limit=10&page=${page}${
-          title ? "&title=" + title : ""
+          title ? "&text=" + title : ""
         }`
       )
       .then((res) => ({
         data: res.data,
         page: res.page,
+        total: res.total,
       }));
 
   static fetchSinglePost = ({ id }: RequestByIdParams): Promise<Post> =>

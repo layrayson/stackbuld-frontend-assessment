@@ -17,23 +17,22 @@ const ViewSingleUserPostPage = () => {
   const { currentPost } = useTypedSelector((state) => state.postReducer);
   const { mutate, isLoading: deleting } = useDeleteSinglePost();
 
-  const { isFetched, data } = useFetchSinglePost(
+  const { isFetched, isLoading, data } = useFetchSinglePost(
     { id: postId as string },
     currentPost
   );
   return (
     <>
       <div>
-        {data && (
-          <BlogPostDetailedView
-            title={data.text.substring(0, 30)}
-            content={data.text}
-            blogImage={data.image}
-            author={data.owner.firstName + " " + data.owner.lastName}
-            avatar={data.owner.picture}
-            updatedAt={data.publishDate}
-          />
-        )}
+        <BlogPostDetailedView
+          title={data?.text.substring(0, 30)}
+          content={data?.text}
+          blogImage={data?.image}
+          author={data?.owner.firstName + " " + data?.owner.lastName}
+          avatar={data?.owner.picture}
+          updatedAt={data?.publishDate}
+          showSkeleton={isLoading || !data}
+        />
 
         <div className="pt-24 flex justify-end gap-4">
           <Button

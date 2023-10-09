@@ -7,7 +7,7 @@ export const useFetchPaginatedPosts = (
   enabled?: boolean
 ) => {
   return useQuery({
-    queryKey: ["posts"],
+    queryKey: ["posts", params.title, params.page],
     queryFn: () => PostService.fetchPaginatedPosts(params),
     enabled: enabled ?? true,
   });
@@ -17,7 +17,7 @@ export const useFetchPaginatedPostsByUser = (
   params: PaginatedRequestByUserParams
 ) => {
   return useQuery({
-    queryKey: ["user-posts"],
+    queryKey: ["user-posts", params.title, params.page],
     queryFn: () => PostService.fetchPaginatedPostsByUser(params),
   });
 };
