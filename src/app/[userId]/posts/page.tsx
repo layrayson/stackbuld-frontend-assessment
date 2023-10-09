@@ -10,7 +10,6 @@ import {
 } from "next/navigation";
 import { Dispatch, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import ReactPaginate from "react-paginate";
 import Pagination from "@/components/custom/Pagination";
 
 const UserPostsPage = () => {

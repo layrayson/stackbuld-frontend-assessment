@@ -34,7 +34,6 @@ const NavBar = () => {
                 </span>
                 <DebounceInput
                   onChange={(event) => {
-                    console.log(event);
                     router.push(
                       `${pathName}${
                         event.target.value ? "?title=" + event.target.value : ""

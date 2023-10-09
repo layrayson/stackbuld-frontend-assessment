@@ -3,11 +3,9 @@
 import Pagination from "@/components/custom/Pagination";
 import BlogPostPreview from "@/components/templates/BlogPostPreview";
 import { useFetchPaginatedPosts } from "@/lib/hooks/useFetchPaginatedData";
-import { useFetchUsers } from "@/lib/hooks/useFetchUsers";
 import PostAction from "@/lib/redux/post/post.action";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Dispatch, useCallback } from "react";
-import ReactPaginate from "react-paginate";
 import { useDispatch } from "react-redux";
 
 export default function Home() {
@@ -36,7 +34,6 @@ export default function Home() {
   );
 
   const handlePageClick = ({ selected }: { selected: number }) => {
-    console.log(selected);
     router.push(pathName + "?" + createQueryString("page", `${selected + 1}`));
   };
 

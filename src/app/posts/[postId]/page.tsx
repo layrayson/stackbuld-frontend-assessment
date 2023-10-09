@@ -1,22 +1,17 @@
 "use client";
-import Button from "@/components/custom/Button";
 import BlogPostDetailedView from "@/components/templates/BlogPostDetailedView";
 import { useFetchSinglePost } from "@/lib/hooks/useFetchDataById";
-import { useDeleteSinglePost } from "@/lib/hooks/useMutatePost";
 import { useTypedSelector } from "@/lib/hooks/useTypedSelector";
-import { useParams, usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useParams } from "next/navigation";
 
 const ViewSinglePostPage = () => {
   const params = useParams();
 
-  const router = useRouter();
-  const pathName = usePathname();
   const { postId } = params;
 
   const { currentPost } = useTypedSelector((state) => state.postReducer);
 
-  const { isFetched, data, isLoading } = useFetchSinglePost(
+  const { data, isLoading } = useFetchSinglePost(
     { id: postId as string },
     currentPost
   );
