@@ -78,11 +78,12 @@ const UserPostsPage = () => {
           </div>
         }
       </div>
-      <div className="w-fit mx-auto pt-8">
+      <div className="w-fit mx-auto pt-8 px-2">
         <Pagination
           handlePageClick={handlePageClick}
           pageCount={Math.floor((posts?.total ?? 0) / 10)}
           initialPage={posts?.page ?? 0}
+          currentPage={posts?.page ?? 0}
         />
       </div>
     </>

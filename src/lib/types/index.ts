@@ -15,7 +15,7 @@ export type User = {
 };
 export type PaginatedResponse<T> = {
   data: T[];
-  page: number | null;
+  page: number;
   total: number;
 };
 export type RequestByIdParams = {

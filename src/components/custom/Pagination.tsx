@@ -3,11 +3,13 @@ interface PaginationProps {
   handlePageClick(selectedItem: { selected: number }): void;
   initialPage: number;
   pageCount: number;
+  currentPage: number;
 }
 const Pagination = ({
   initialPage,
   pageCount,
   handlePageClick,
+  currentPage,
 }: PaginationProps) => {
   return (
     <ReactPaginate
@@ -21,6 +23,7 @@ const Pagination = ({
       onPageChange={handlePageClick}
       pageCount={pageCount}
       initialPage={initialPage}
+      forcePage={currentPage}
       disableInitialCallback={true}
       previousLabel={
         <button className="border w-8 h-8 rounded flex items-center justify-center">
@@ -29,7 +32,7 @@ const Pagination = ({
         </button>
       }
       renderOnZeroPageCount={null}
-      containerClassName=" pagination flex justify-center   gap-2  items-center w-fit"
+      containerClassName=" pagination flex flex-wrap justify-center   gap-2  items-center w-fit"
       pageClassName="page-item text-sm text-gray-700 border bg-white rounded "
       pageLinkClassName="page-link w-8 h-8 flex items-center justify-center font-medium"
       previousClassName="page-item"

@@ -12,7 +12,7 @@
     "@tanstack/react-query": "^4.36.1",
     "axios": "^1.5.1",
     "date-fns": "^2.30.0",
-    "next": "13.5.4",
+    "next": "13.5.3",
     "next-redux-wrapper": "^8.1.0",
     "react": "^18",
     "react-debounce-input": "^3.3.0",

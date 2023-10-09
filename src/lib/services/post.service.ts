@@ -20,7 +20,7 @@ export default class PostService {
       )
       .then((res) => ({
         data: res.data,
-        page: res.page,
+        page: res.page - 1,
         total: res.total,
       }));
 
@@ -37,7 +37,7 @@ export default class PostService {
       )
       .then((res) => ({
         data: res.data,
-        page: res.page,
+        page: res.page - 1,
         total: res.total,
       }));
 
